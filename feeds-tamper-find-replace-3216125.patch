@@ -1,0 +1,14 @@
+--- src/Plugin/Tamper/FindReplaceRegex.php.ORG	2022-10-10 11:46:53.575371122 +0200
++++ src/Plugin/Tamper/FindReplaceRegex.php	2022-10-10 11:47:06.175364547 +0200
+@@ -90,8 +90,10 @@
+    * {@inheritdoc}
+    */
+   public function tamper($data, TamperableItemInterface $item = NULL) {
++  	if (is_null($data))
++	  return NULL;
+     if (!is_string($data)) {
+-      throw new TamperException('Input should be a string.');
++      throw new TamperException('Input should be a string (is: '.gettype($data).').');
+     }
+     $find = $this->getSetting(self::SETTING_FIND);
+     $replace = $this->getSetting(self::SETTING_REPLACE);
